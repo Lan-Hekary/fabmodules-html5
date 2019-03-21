@@ -11,7 +11,7 @@ define(function() {
    exports.z0 = "" // z origin
    exports.zmin = "" // bottom z
    exports.zjog = "" // z jog
-   exports.server = '127.0.0.1:12345' // machine send server
+   exports.server = window.location.hostname + ":" + window.location.port // machine send server
    exports.send = "" // machine send command
    exports.type = "" // file type extension
    exports.processes = {} // processes

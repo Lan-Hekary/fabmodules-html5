@@ -58,6 +58,12 @@ define(['require',
             send: globals.send
          }
          controls.innerHTML += mod_path_file_controls_tpl(ctx)
+		 if(globals.output == "Roland_mill"){
+			findEl("mod_roland_machine").value='mdx_20';
+			var event = new Event('change');
+			findEl("mod_roland_machine").dispatchEvent(event);
+		 }
+		 
       }
       // moving events out of the template building routine
       function mod_path_file_controls_events(routine,routineModName){

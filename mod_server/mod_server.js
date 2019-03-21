@@ -57,7 +57,7 @@ function onWsMessage(ws, data) {
 // Setup the server
 function setup(options, callback) {
 
-  var fileServer = new StaticServer('./');
+  var fileServer = new StaticServer('../');
   var httpServer = http.createServer(function (request, response) {
     request.addListener('end', function () {
         fileServer.serve(request, response);
@@ -70,8 +70,8 @@ function setup(options, callback) {
   wss.on('connection', function(connection) {
     var clientAddress = connection._socket.remoteAddress;
     clientAddress = clientAddress.replace('::ffff:', ''); // might be IPv4 over IPv6
-    if (clientAddress != options.allowedAddress) {
-      console.log("error: client address " + clientAddress + "doesn't match");
+    if (!options.allowedAddress.includes(clientAddress)) {
+      console.log("error: client address " + clientAddress + " doesn't match");
       return
     }
     connection.on('message', function(data) {
@@ -86,7 +86,7 @@ function setup(options, callback) {
 function main() {
   var options = {
     port: '12345',
-    allowedAddress: '127.0.0.1'
+    allowedAddress: ['127.0.0.1']
   };
 
   setup(options, function(err) {

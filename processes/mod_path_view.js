@@ -31,13 +31,13 @@ define(["require",
    //    show a path with WebGL
    //
    function mod_path_show_gl(path) {
-      if (path.length == 0)
-         return
       var show_connections = true
       //
       // clear display
       //
       ui.ui_clear()
+	  if (path.length == 0)
+         return
       //
       // set up canvas
       //
@@ -50,7 +50,7 @@ define(["require",
       canvas.style.display = "none"
       var canvas = findEl("mod_gl_canvas")
       canvas.style.display = "inline"
-      canvas.focus()
+      //canvas.focus()
       canvas.width = owidth
       canvas.height = owidth
       //

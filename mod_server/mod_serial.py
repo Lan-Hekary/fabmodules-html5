@@ -69,23 +69,23 @@ def pause():
    global state
    if (state == RUN):
       state = PAUSE
-      pause_button.config(text="continue")
+      pause_button.config(text="Continue")
    elif (state == PAUSE):
       state = RUN
-      pause_button.config(text="pause")
+      pause_button.config(text="Pause")
 #
 # cancel routine
 #
 def cancel():
    global s
    s.close()
-   sys.exit()
+   os._exit(0)
 #
 # quit routine
 #
 def quit():
    s.close()
-   sys.exit()
+   os._exit(0)
 #
 # command line
 #
@@ -95,7 +95,7 @@ if (len(sys.argv) != 5):
    print "   speed = comm speed"
    print "   flow = flow control (none | xonxoff | rtscts | dsrdtr )"
    print "   file = file to send"
-   sys.exit()
+   os._exit(0)
 port = sys.argv[1]
 speed = sys.argv[2]
 flow = sys.argv[3]
@@ -123,13 +123,18 @@ s.flushOutput()
 # set up GUI
 #
 root = Tk()
-root.title('mod_serial.py')
+root.protocol("WM_DELETE_WINDOW", cancel)
+root.bind('<Escape>', lambda e: cancel())
+root.bind('<Return>', lambda e: pause())
+root.title('Send Serial to ' + port)
 canvas = Canvas(root, width=WINDOW, height=.25*WINDOW, background='white')
 canvas.create_text(.5*WINDOW,.1*WINDOW,text="",font=("Helvetica",24),tags="text",fill="#0000b0")
 canvas.pack()
-pause_button = Button(root,text="pause",command=pause)
+canvas.itemconfigure("text",text="Click Run to Start")
+canvas.update()
+pause_button = Button(root,text="Run",command=pause)
 pause_button.pack()
-cancel_button = Button(root,text="cancel",command=cancel)
+cancel_button = Button(root,text="Cancel",command=cancel)
 cancel_button.pack()
 #
 # start sending thread

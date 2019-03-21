@@ -40,7 +40,7 @@ define(['require',
       canvas.style.display = "none"
       var canvas = findEl("mod_gl_canvas")
       canvas.style.display = "inline"
-      canvas.focus()
+      //canvas.focus()
       canvas.width = owidth
       canvas.height = owidth
       //

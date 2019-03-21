@@ -7,7 +7,7 @@ require.config({
 });
 
 
-require(["mods/mod_ui","inputs/mod_inputs"], function(mod_ui, mod_inputs){
+require(["mods/mod_ui","inputs/mod_inputs","settings"], function(mod_ui, mod_inputs){
    
    mod_ui.initGUI();
    mod_inputs.initInputs();
